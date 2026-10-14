@@ -1,0 +1,232 @@
+[
+  {
+    "slug": "detection-mouvement-gpu",
+    "title": "Détection d'objets mobiles en temps réel sur GPU",
+    "pitch": "Un filtre GStreamer qui isole les objets en mouvement dans une vidéo, porté du CPU vers CUDA.",
+    "period": "Juillet 2026",
+    "context": "EPITA — projet du cours IRGPU (programmation GPU)",
+    "team": "Projet de groupe — TODO : nombre de membres",
+    "role": "TODO : préciser ma part (modèle de fond, hystérésis, morphologie, portage CUDA, bench…)",
+    "tags": ["C++", "CUDA", "GStreamer", "CMake", "Traitement vidéo"],
+    "highlight": { "value": "×14,8", "label": "82,5 → 1 222 FPS (CPU → CUDA)" },
+    "cover": "assets/img/projects/detection-mouvement-gpu/cover.png",
+    "problem": "Séparer les objets en mouvement du fond d'une vidéo demande un traitement par pixel à chaque image. Sur CPU, ce traitement plafonne vite et ne laisse aucune marge pour un usage temps réel.",
+    "work": [
+      "Modèle de fond à 4 « réservoirs » pondérés par pixel, mis à jour au fil des images.",
+      "Seuillage par hystérésis (seuils bas et haut) pour obtenir un masque de mouvement propre.",
+      "Ouverture et fermeture morphologiques pour supprimer le bruit et combler les trous.",
+      "Une implémentation CPU de référence, puis un portage CUDA de toute la chaîne.",
+      "Intégration sous forme de plugin GStreamer (cudafilter), avec outils de benchmark et de visualisation."
+    ],
+    "result": [
+      "82,5 FPS sur CPU contre 1 222 FPS en CUDA, soit un facteur ×14,8.",
+      "TODO : GPU / CPU utilisés pour la mesure, résolution de la vidéo"
+    ],
+    "links": [],
+    "privateRepo": true,
+    "gallery": [
+      { "src": "assets/img/projects/detection-mouvement-gpu/masque.png", "caption": "TODO : image d'entrée et masque de mouvement côte à côte" }
+    ]
+  },
+  {
+    "slug": "raymarching-sdf",
+    "title": "Sculpting with distances — ray marcher SDF",
+    "pitch": "Un outil de modélisation 3D temps réel sans maillage : chaque forme est une fonction de distance signée.",
+    "period": "Mars – juillet 2026",
+    "context": "EPITA — cours Introduction à la synthèse d'image",
+    "team": "Binôme avec Lancelot Doucet",
+    "role": "Interface et modes d'édition, nouvelles primitives (cône, ellipsoïde), rotation et déplacement d'objets, textures, couleurs lissées, optimisations du rendu.",
+    "tags": ["C++17", "OpenMP", "GLFW", "Ray marching", "SDF", "CSG"],
+    "highlight": { "value": "7 → ~60 FPS", "label": "après optimisation, sur CPU" },
+    "cover": "assets/img/projects/raymarching-sdf/hero.png",
+    "problem": "Modéliser en 3D sans maillage, éditer la scène pendant que le rendu tourne, et tenir le temps réel sur CPU seul.",
+    "work": [
+      "Rendu par ray marching de fonctions de distance signées : six primitives (sphère, plan, boîte, tore, cône, ellipsoïde).",
+      "Opérations CSG directement sur les champs de distance : union, union lisse, intersection, soustraction.",
+      "Éclairage Blinn-Phong, normales par gradient du champ de distance, textures en projection triplanaire.",
+      "Prévisualisation en direct de la forme sous le curseur avant de la valider ; export et import des scènes en texte.",
+      "Optimisations : parallélisation OpenMP, arrêt anticipé des rayons, suréchantillonnage adaptatif sur les contours uniquement."
+    ],
+    "result": [
+      "Passage de 7 FPS (première version) à environ 60 FPS sur la même scène, en 320×180 (variable selon la scène et la machine)."
+    ],
+    "links": [
+      { "label": "Code", "url": "https://github.com/lance-leau/rayMarching" },
+      { "label": "Slides", "url": "https://docs.google.com/presentation/d/1hYh5Z2vf0Jh406fjJZ57Vop1zHKFyXCAf8uv4Gt0TuA/edit?usp=sharing" }
+    ],
+    "gallery": [
+      { "src": "assets/img/projects/raymarching-sdf/preview.png", "caption": "Prévisualisation d'un tore avant de l'appliquer au cube." },
+      { "src": "assets/img/projects/raymarching-sdf/aa_off.png", "caption": "Contour sans suréchantillonnage adaptatif." },
+      { "src": "assets/img/projects/raymarching-sdf/aa_on.png", "caption": "Même contour avec suréchantillonnage adaptatif." }
+    ]
+  },
+  {
+    "slug": "suivi-tumeur-irm",
+    "title": "Suivi de l'évolution d'une tumeur en IRM",
+    "pitch": "Recaler deux IRM d'un même patient, segmenter la tumeur et quantifier son évolution.",
+    "period": "Juin – juillet 2026",
+    "context": "EPITA — mini-projet ITK / VTK",
+    "team": "Équipe de 3, avec Erwan Le Grand et Lancelot Doucet",
+    "role": "Exploration et recalage en pair programming avec l'équipe ; responsable de la segmentation des tumeurs.",
+    "tags": ["Python", "SimpleITK", "VTK", "Imagerie médicale", "Segmentation", "Recalage"],
+    "highlight": { "value": "−47 %", "label": "d'erreur après recalage" },
+    "cover": "assets/img/projects/suivi-tumeur-irm/cover.png",
+    "problem": "Comparer deux IRM acquises à des dates différentes : les volumes ne sont pas alignés et leurs intensités diffèrent, ce qui empêche de mesurer directement l'évolution de la tumeur.",
+    "work": [
+      "En équipe : recalage rigide puis affine (information mutuelle de Mattes, pyramide multi-résolution à 3 niveaux).",
+      "Ma partie : segmentation semi-automatique par Connected Threshold depuis une graine, après lissage CurvatureFlow.",
+      "Fermeture morphologique pour combler les trous du masque ; seuils recalibrés pour le second volume, dont les intensités sont décalées après rééchantillonnage.",
+      "Analyse (volume, Dice, centre de masse) et rendu 3D VTK par marching cubes réalisés par mes coéquipiers."
+    ],
+    "result": [
+      "Erreur absolue moyenne entre les deux volumes réduite de 47 % par le recalage (81,6 → 43,1).",
+      "Tumeur segmentée d'environ 4 à 5 cm³ ; le rendu 3D montre une légère croissance entre les deux examens.",
+      "Limite : la segmentation reste semi-automatique et doit être recalibrée pour un autre patient."
+    ],
+    "links": [
+      { "label": "Code", "url": "https://github.com/Palpatoche8/VITK-Tumor-Tracking" }
+    ],
+    "gallery": [
+      { "src": "assets/img/projects/suivi-tumeur-irm/rendu-3d.png", "caption": "TODO : capture du rendu 3D (GRE1 en bleu, GRE2 en rouge)" }
+    ]
+  },
+  {
+    "slug": "panorama-stitching",
+    "title": "Assemblage de panoramas, de Python à C++",
+    "pitch": "Une chaîne SIFT → RANSAC → warp → fusion, prototypée en Python puis réimplémentée en C++.",
+    "period": "Juin – juillet 2026",
+    "context": "EPITA — projet de vision par ordinateur",
+    "team": "Binôme avec Lancelot Doucet",
+    "role": "Assemblage par image de référence, suite de tests et benchmark C++, vérification de cohérence Python / C++ et rapport associé, revue et fusion des PR.",
+    "tags": ["Python", "C++", "OpenCV", "SIFT", "RANSAC", "Homographie"],
+    "highlight": { "value": "90–93 %", "label": "d'inliers après RANSAC" },
+    "cover": "assets/img/projects/panorama-stitching/cover.png",
+    "problem": "Produire un panorama à partir de photos qui se chevauchent, puis garantir qu'une version C++ plus rapide se comporte exactement comme le prototype Python.",
+    "work": [
+      "Détection de 3 000 points SIFT, appariement avec le ratio de Lowe (0,75).",
+      "Estimation d'homographie par RANSAC implémenté à la main (seuil de 4 px).",
+      "Warp perspective et fusion pondérée par transformée de distance pour masquer les raccords.",
+      "Assemblage autour d'une image de référence, tests unitaires C++ et benchmark Python / C++.",
+      "Script de vérification de cohérence entre les deux implémentations (normalisation et inversibilité de H, nombre de correspondances et d'inliers)."
+    ],
+    "result": [
+      "Sur 4 paires consécutives : 541 à 848 correspondances, dont 90 à 93 % d'inliers.",
+      "Même pipeline vérifié des deux côtés (Python et C++).",
+      "TODO : gain de temps mesuré par le benchmark C++ vs Python"
+    ],
+    "links": [
+      { "label": "Code", "url": "https://github.com/lance-leau/panorama-stitching" }
+    ],
+    "gallery": [
+      { "src": "assets/img/projects/panorama-stitching/panorama.jpg", "caption": "TODO : panorama obtenu sur le jeu d'images de test" }
+    ]
+  },
+  {
+    "slug": "pfee-cao-ar",
+    "title": "PFEE — CAO en réalité augmentée sur smartphone",
+    "pitch": "Repenser l'interaction avec un modèle de CAO en réalité augmentée sur téléphone, avec 3DS (Dassault Systèmes).",
+    "period": "Mai – octobre 2026",
+    "context": "EPITA — PFEE, en partenariat avec 3DS (Dassault Systèmes)",
+    "team": "Projet de groupe — TODO : nombre de membres",
+    "role": "Élève ingénieur-chercheur. TODO : préciser mes contributions (fonctionnalités, études, tests utilisateurs…)",
+    "tags": ["TypeScript", "Three.js", "WebXR", "Réalité augmentée", "UX"],
+    "highlight": null,
+    "cover": "assets/img/projects/pfee-cao-ar/cover.png",
+    "problem": "Les outils de CAO sont pensés pour la souris et le clavier. Sur un smartphone en réalité augmentée, il faut réinventer la sélection, la manipulation et l'inspection d'une pièce 3D avec quelques gestes tactiles.",
+    "work": [
+      "Application web AR (WebXR + Three.js) affichant un modèle 3D ancré dans l'espace réel.",
+      "Reconnaissance de gestes centralisée, avec des modes Édition et Inspection.",
+      "Sélection d'objets, inversion de sélection, annuler / rétablir.",
+      "Calibration de la surface détectée avant de placer le modèle, tutoriel guidé des gestes.",
+      "TODO : distinguer ce que j'ai fait personnellement de ce qu'a fait l'équipe"
+    ],
+    "result": [
+      "TODO : résultat concret (démo à 3DS, retours utilisateurs, mesures…)"
+    ],
+    "links": [
+      { "label": "Code", "url": "https://github.com/arthurlebourg/PFEE-3DS_CAD-UX-Handheld-AR" }
+    ],
+    "gallery": [
+      { "src": "assets/img/projects/pfee-cao-ar/demo.gif", "caption": "TODO : capture ou GIF de l'application sur téléphone" }
+    ]
+  },
+  {
+    "slug": "baka-golf",
+    "title": "Baka Golf — minigolf en réalité augmentée sur bac à sable",
+    "pitch": "Un minigolf projeté sur du sable : la caméra de profondeur lit le relief et on tire en pinçant, façon lance-pierre.",
+    "period": "Septembre 2026",
+    "context": "EPITA — Codefest Week",
+    "team": "Équipe de 8",
+    "role": "Compteur de coups et affichage du résultat, obstacle « train » qui traverse le terrain. Le tir au pincement et le suivi des marqueurs ont été réalisés par d'autres membres de l'équipe.",
+    "tags": ["Godot", "GDScript", "Caméra de profondeur", "ArUco", "OpenCV", "Réalité augmentée"],
+    "highlight": null,
+    "cover": "assets/img/projects/baka-golf/cover.jpg",
+    "problem": "Transformer un bac à sable en terrain de jeu interactif : le relief modelé à la main devient le parcours, et le joueur interagit sans manette.",
+    "work": [
+      "En équipe : lecture du relief par caméra de profondeur, tir au pincement, suivi de marqueurs ArUco pour déplacer le départ, le trou et un bumper, détection de murs en Lego.",
+      "Ma partie : compteur de coups avec affichage du résultat en fin de partie, et obstacle « train » qui traverse le terrain."
+    ],
+    "result": [
+      "TODO : résultat concret (nombre de joueurs pendant l'événement, classement, retours…)"
+    ],
+    "links": [],
+    "privateRepo": true,
+    "gallery": [
+      { "src": "assets/img/projects/baka-golf/photo-bac.jpg", "caption": "TODO : photo du bac à sable avec le terrain projeté" }
+    ]
+  },
+  {
+    "slug": "simulation-feu-opengl",
+    "title": "Simulation de feu en particules",
+    "pitch": "Du feu, des étincelles et de la fumée en temps réel avec OpenGL et des shaders GLSL.",
+    "period": "Mai – juin 2026",
+    "context": "EPITA — projet OpenGL",
+    "team": "Binôme avec Lancelot Doucet",
+    "role": "Premier système de particules de feu et shaders de flamme ; mise en place du build.",
+    "tags": ["C++17", "OpenGL 3.3", "GLSL", "Particules"],
+    "highlight": null,
+    "cover": "assets/img/projects/simulation-feu-opengl/cover.png",
+    "problem": "Rendre un feu crédible en temps réel avec des primitives simples, sans allouer de mémoire pendant la boucle de rendu.",
+    "work": [
+      "Réserve fixe de 500 particules (pas d'allocation dans la boucle), émetteur d'environ 300 particules par seconde.",
+      "Vertex shader : dégradé de couleur (blanc, jaune, orange, rouge, transparent) et taille pilotés par l'âge de la particule.",
+      "Fragment shader : particule circulaire à atténuation douce ; blending additif pour l'effet de braise.",
+      "Le projet a ensuite été étendu en binôme : étincelles, fumée, skybox et maillages."
+    ],
+    "result": [
+      "TODO : capture ou GIF du rendu, FPS mesurés"
+    ],
+    "links": [
+      { "label": "Code", "url": "https://github.com/Palpatoche8/OpenGL" }
+    ],
+    "gallery": [
+      { "src": "assets/img/projects/simulation-feu-opengl/feu.gif", "caption": "TODO : GIF de la simulation" }
+    ]
+  },
+  {
+    "slug": "benchmark-fast-marching",
+    "title": "Benchmark de la Fast Marching Method",
+    "pitch": "Comparer une implémentation classique et une version accélérée par Numba d'un calcul de distance géodésique.",
+    "period": "Février 2026",
+    "context": "EPITA",
+    "team": "Binôme avec Clément Grégoire",
+    "role": "API Django REST (modèles, sérialiseurs, vues), lanceur de calculs, benchmark automatique, aperçu du masque, graphiques et Dockerfiles.",
+    "tags": ["Python", "Numba", "Django REST", "Dash", "Docker"],
+    "highlight": null,
+    "cover": "assets/img/projects/benchmark-fast-marching/cover.png",
+    "problem": "La Fast Marching Method calcule une distance géodésique sur une image, mais en Python pur elle est lente. Il fallait mesurer objectivement ce qu'apporte la compilation JIT avec Numba.",
+    "work": [
+      "Deux implémentations de la propagation : classique et compilée avec Numba.",
+      "Back-end Django REST qui lance les calculs, stocke les résultats et expose un aperçu du masque.",
+      "Benchmark automatique et graphiques de comparaison dans un front Dash.",
+      "Conteneurisation complète avec Docker Compose."
+    ],
+    "result": [
+      "TODO : accélération mesurée (Numba vs Python classique) et taille des images testées"
+    ],
+    "links": [
+      { "label": "Code", "url": "https://github.com/Clement1313/Rempy" }
+    ],
+    "gallery": []
+  }
+]

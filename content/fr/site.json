@@ -1,0 +1,74 @@
+{
+  "name": "Thomas Scheepers",
+  "headline": "Élève ingénieur en informatique — spécialité image",
+  "school": "EPITA, majeure SCIA, promo 2027",
+  "intro": "Je m'intéresse au traitement d'image, à la vision par ordinateur et à l'informatique graphique : du pixel au rendu 3D, en passant par le GPU.",
+  "lookingFor": "Je cherche un stage de fin d'études en image, vision ou informatique graphique.",
+  "lookingForDetails": "TODO : date de début, durée (ex. 6 mois) et zone géographique / télétravail",
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/Palpatoche8" },
+    { "label": "LinkedIn", "url": "TODO" },
+    { "label": "CV (PDF)", "url": "assets/cv/CV_Thomas_Scheepers.pdf" },
+    { "label": "E-mail", "url": "TODO" }
+  ],
+  "experience": [
+    {
+      "company": "TotalEnergies Renouvelables",
+      "title": "TODO : intitulé du poste",
+      "period": "15 septembre 2025 – 31 janvier 2026",
+      "items": [
+        "Conception de tableaux de bord Power BI (modèles et mesures DAX).",
+        "Scripts d'extraction de données SharePoint : plus de 7 400 doublons détectés.",
+        "Audit de données NetSuite : plus de 1 000 bons de commande invalides identifiés, pour environ 2,8 M€.",
+        "TODO : langage utilisé pour les scripts, impact concret pour l'équipe"
+      ],
+      "tags": ["Power BI", "DAX", "SharePoint", "NetSuite"]
+    }
+  ],
+  "otherProjects": [
+    {
+      "title": "WaveLength multijoueur",
+      "desc": "Jeu de devinettes en temps réel inspiré de WaveLength : salons avec code, liste des joueurs synchronisée.",
+      "tags": ["React", "Node.js", "Socket.IO", "Tailwind"],
+      "url": "https://github.com/Palpatoche8/Wavelength"
+    },
+    {
+      "title": "Site de La REF",
+      "desc": "Site de la radio étudiante : lecteur audio personnalisé, panneau d'administration des émissions.",
+      "tags": ["Next.js", "TypeScript", "Tailwind"],
+      "url": "https://github.com/Palpatoche8/La-REF"
+    },
+    {
+      "title": "Qui est-ce ? en ligne",
+      "desc": "Version deux joueurs en temps réel du jeu « Qui est-ce ? ».",
+      "tags": ["React", "Vite", "Express", "Socket.IO"],
+      "url": ""
+    }
+  ],
+  "ui": {
+    "nav_projects": "Projets",
+    "nav_experience": "Expérience",
+    "nav_contact": "Contact",
+    "section_projects": "Projets sélectionnés",
+    "section_experience": "Expérience",
+    "section_other": "Autres projets",
+    "section_contact": "Contact",
+    "contact_text": "Une offre de stage, une question sur un projet ? Écrivez-moi.",
+    "problem": "Le problème",
+    "work": "Ce qui a été réalisé",
+    "result": "Résultat",
+    "context": "Contexte",
+    "team": "Équipe",
+    "role": "Mon rôle",
+    "stack": "Stack",
+    "links": "Liens",
+    "gallery": "Images",
+    "back": "← Tous les projets",
+    "details": "Voir le projet",
+    "private_repo": "Dépôt privé",
+    "not_found": "Projet introuvable.",
+    "missing_image": "Visuel manquant",
+    "theme_toggle": "Changer de thème",
+    "footer": "Site statique, sans framework. Code source sur GitHub."
+  }
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projet — Thomas Scheepers</title>
+  <script>
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="project">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" data-site="name"></a>
+      <nav class="nav">
+        <a href="./#projets" data-ui="nav_projects"></a>
+        <a href="./#contact" data-ui="nav_contact"></a>
+        <span class="lang-switch" id="lang-switch"></span>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Thème">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container narrow" id="project"></main>
+
+  <footer class="site-footer">
+    <div class="container"><span data-ui="footer"></span></div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
