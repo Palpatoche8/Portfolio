@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thomas Scheepers — Portfolio</title>
+  <meta name="description" content="Portfolio de Thomas Scheepers, élève ingénieur EPITA spécialisé en image, vision et informatique graphique.">
+  <script>
+    // Applique le thème avant le rendu pour éviter un flash.
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" data-site="name"></a>
+      <nav class="nav">
+        <a href="#projets" data-ui="nav_projects"></a>
+        <a href="#experience" data-ui="nav_experience"></a>
+        <a href="#contact" data-ui="nav_contact"></a>
+        <span class="lang-switch" id="lang-switch"></span>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Thème">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="app">
+    <section class="hero">
+      <h1 data-site="name"></h1>
+      <p class="headline" data-site="headline"></p>
+      <p class="school" data-site="school"></p>
+      <p class="intro" data-site="intro"></p>
+      <p class="looking"><strong data-site="lookingFor"></strong> <span data-site="lookingForDetails"></span></p>
+      <ul class="links" id="hero-links"></ul>
+    </section>
+
+    <section id="projets" class="section">
+      <h2 data-ui="section_projects"></h2>
+      <div class="grid" id="project-grid"></div>
+    </section>
+
+    <section id="experience" class="section">
+      <h2 data-ui="section_experience"></h2>
+      <div id="experience-list"></div>
+    </section>
+
+    <section id="autres" class="section">
+      <h2 data-ui="section_other"></h2>
+      <ul class="other-list" id="other-list"></ul>
+    </section>
+
+    <section id="contact" class="section">
+      <h2 data-ui="section_contact"></h2>
+      <p data-ui="contact_text"></p>
+      <ul class="links" id="contact-links"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><span data-ui="footer"></span></div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
